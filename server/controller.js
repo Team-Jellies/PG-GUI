@@ -1,6 +1,22 @@
-
+// MIDDLEWARES
 const file = {};
- 
+
+// Get table data from database
+file.getData = (req, res, next) => {
+const db = res.locals.pool;
+
+  const { queryString } = req.body
+  db.query(queryString,(err, result)=>{
+    
+    if (err) {
+      return next({log: err.stack, message: "Error executing query in getData"}) 
+    }
+    res.locals.info = result.rows;
+   return next();
+ })
+}
+
+// Get table names middleware to display on dropdown menu after fetching database
 file.getTableNames = (req, res, next) => {
   const db = res.locals.pool;
     // write code here
@@ -15,6 +31,7 @@ file.getTableNames = (req, res, next) => {
    })
  }
 
+ // Update/Patch Middleware 
  file.update = (req, res, next) => {
   const db = res.locals.pool;
     // write code here
@@ -29,23 +46,37 @@ file.getTableNames = (req, res, next) => {
    })
  }
 
+ // Delete middleware
+ file.delete = (req, res, next) => {
+  const db = res.locals.pool;
+    // write code here
+    const { queryString } = req.body
+   
+    db.query(queryString, (err, result)=>{
+      console.log('result:', result)
 
-file.getData = (req, res, next) => {
-const db = res.locals.pool;
-  // write code here
-  const {tableName} =req.body
-  //add as an variable
+      if (err) {
+        return next({log: err.stack, message: "Error executing query in delete"}) 
+      }
+      res.locals.delete = result.rows
+      console.log('res.locals.delete:', res.locals.delete)
 
-  const queryString='select * from '+tableName;
+     return next();
+   })
+ }
+
+
+file.create = (req, res, next) => {
+  const db = res.locals.pool;
+  const { queryString } = req.body;
 
   db.query(queryString,(err, result)=>{
     if (err) {
-      return next({log: err.stack, message: "Error executing query in getData"}) 
+      return next({log: err.stack, message: "Error executing query in create"}) 
     }
-    console.log(result.rows)
-    res.locals.info = result.rows;
+    res.locals.create = result.rows;
    return next();
- })
+  })
 }
 
 module.exports = file;

@@ -1,58 +1,79 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import InputCell from './InputCells.js';
-
 
 class Row extends Component {
   constructor(props) {
-    super(props) 
+    super(props);
 
-    this.state = {
+    this.state = {};
 
-    }
-
-    this.onEnter = this.onEnter.bind(this)
+    this.onEnter = this.onEnter.bind(this);
   }
 
-  onEnter(event){
-    if(event.key === 'Enter'){
-      const newValue = event.target.value;
-      const primaryKey = this.props.data._id;
+  onEnter(event) {
+    const PK = Object.keys(this.props.data)[0]
+    const reRender = this.props.reRender;
+    const uri = this.props.uri;
+    const tableName = this.props.tableName
+    
+    if (event.key === '?') {
       const columnName = event.target.name;
-      let queryString; 
-      if(isNaN(newValue)) {
-        queryString = `UPDATE ${this.props.tableName} SET ${columnName} = '${newValue}' WHERE _id = ${primaryKey}`
-      }
-      else{
-        queryString = `UPDATE ${this.props.tableName} SET ${columnName} = ${newValue} WHERE _id = ${primaryKey}`
-      }
-      const uri = this.props.uri
+      const query = event.target.placeholder;
+      const filterString = `SELECT * FROM ${tableName} WHERE ${columnName} = '${query}'`
 
-      console.log('THIS IS QUERYSTRNG', uri, queryString)
+      reRender(filterString)
+      
+      
+    }
+
+    if (event.key === '/') {
+      const columnName = event.target.name;
+      const query = event.target.placeholder;
+      const filterString = `SELECT * FROM ${tableName} WHERE ${columnName} != '${query}'`
+
+      reRender(filterString)
+      
+    }
+
+    if (event.key === 'Enter') {
+     
+      const newValue = event.target.value;
+      const PKValue = this.props.data[PK];
+      const columnName = event.target.name;
+      let queryString;
+      
+      if (isNaN(newValue)) {
+        queryString = `UPDATE ${tableName} SET ${columnName} = '${newValue}' WHERE ${PK} = ${PKValue}`;
+      } else {
+        queryString = `UPDATE ${tableName} SET ${columnName} = ${Number(newValue)} WHERE ${PK} = ${PKValue}`;
+        }
+
 
       fetch('/server/update', {
         method: 'POST',
-        body: JSON.stringify({uri,queryString}),
+        body: JSON.stringify({ uri, queryString }),
         headers: {
-          'Content-Type' : 'application/json'
+          'Content-Type': 'application/json'
         }
-      })
-
+          }).then(data => reRender())
     }
-
   }
 
-  render () {
+  render() {
     const columns = Object.entries(this.props.data);
     const rowsArr = [];
     columns.forEach((val, index) => {
-        rowsArr.push(<InputCell key={index + '_inputCell'} data={val[1]} column={val[0]} onEnter={this.onEnter} />)
-      });
+      rowsArr.push(
+        <InputCell
+          key={index + '_inputCell'}
+          data={val[1]}
+          column={val[0]}
+          onEnter={this.onEnter}
+        />
+      );
+    });
 
-    return (
-      <div>
-        {rowsArr}
-      </div>
-    );
+    return <div>{rowsArr}</div>;
   }
 }
 
