@@ -3,6 +3,7 @@ import TableDisplay from '../components/TableDisplay';
 import { connect } from 'react-redux';
 import { update } from '../actions/actions.js';
 
+
 const mapDispatchToProps = dispatch => ({
   update: () => dispatch(update())
 });

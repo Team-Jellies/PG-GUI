@@ -1,5 +1,5 @@
 import React from 'react';
-import TableHeader from './TableHeader.js';
+
 
 class CreatePopup extends React.Component {
   constructor(props) {

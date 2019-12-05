@@ -1,36 +1,29 @@
-// WARNING // THIS FILE IS NOT BEING USED 
-// Redux is not implemented yet, all methods used on react should have been reducers
+import React from 'react';
+// import ReduxThunk from 'redux-thunk';
+import actions from 'wherever';
+import store from '../store';
 
-
-import * as types from '../constant/actionTypes';
-import reduxThunk from 'redux-thunk';
-
-const initialState = {
-  count: 0,
-  uri: '',
-  tableNames: []
-}
-
-const reducer = (state = initialState, action) => {
+const thnking = (action) => {
   switch (action.type) {
-    case 'UPDATE_TYPE': 
-    state.count += 1;
-
-    return {
-      ...state,    
-    }
-    case 'SET_URI':
-      //todo use action payload
-        const uri = document.querySelector('#uri').value;
-        return ({
-          ...state,
-          uri
-        })
     case 'GET_NAMES':
-          return {...state, tableNames: action.payload };
+          const data = { uri: action.payload }
           // this.setState({ uri });
           // const data = { uri };
-
+          fetch('/server/tablenames', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          })
+            .then(res => res.json())
+            .then(result => {
+              const titlesArray = [];
+              result.forEach(el => {
+                if (el.tablename.slice(0, 4) !== 'sql_') {
+                  titlesArray.push(el.tablename);
+                }
+              });
+              return titlesArray;
+            }).then(arr => {store.dispatch(/*ACTION CREATOR ( ARR )*/)});
     case 'GET_TABLE':
           // Get required data to build queryString to query database
           const uri = this.state.uri;
@@ -52,12 +45,5 @@ const reducer = (state = initialState, action) => {
                 currentTable: tableName
               // });
             });
-
-    default: return state;
   }
 }
-// const reducer = () => {
-
-// }
-
-export default reducer;
