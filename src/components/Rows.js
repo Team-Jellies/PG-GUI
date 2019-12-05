@@ -21,7 +21,7 @@ class Row extends Component {
       const filterString = `SELECT * FROM ${tableName} WHERE ${columnName} = '${query}'`
 
       // reRender(filterString)
-      this.props.getThunkTable({ currentTable: this.props.currentTable, queryString: filterString});
+      this.props.getThunkTable(filterString);
       
       
     }
@@ -32,7 +32,7 @@ class Row extends Component {
       const filterString = `SELECT * FROM ${tableName} WHERE ${columnName} != '${query}'`
 
       // reRender(filterString)
-      this.props.getThunkTable({ currentTable: this.props.currentTable, queryString: filterString});
+      this.props.getThunkTable(filterString);
     }
 
     if (event.key === 'Enter') {
@@ -48,7 +48,21 @@ class Row extends Component {
         queryString = `UPDATE ${tableName} SET ${columnName} = ${Number(newValue)} WHERE ${PK} = ${PKValue}`;
         }
 
-      this.props.getThunkTable({ currentTable: this.props.currentTable, queryString });
+      // const test = new Promise(() => this.props.getThunkTable(queryString)).then(() => {
+      //   console.log('does this click?')
+      //   document.querySelector('#load').click()})
+      // const test2 = new Promise(() => this.props.getThunkTable());
+      // test
+
+      // async function test() {
+      //   return this.props.getThunkTable(queryString)
+      // }
+
+      // test.then(()=> console.log('g'))
+
+     this.props.getThunkTable(queryString);
+      // }
+      // getData()
 
       // fetch('/server/update', {
       //   method: 'POST',
@@ -58,6 +72,7 @@ class Row extends Component {
       //   }
       //     }).then(data => reRender())
     }
+  
   }
 
   render() {

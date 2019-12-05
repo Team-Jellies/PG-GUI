@@ -146,7 +146,7 @@ render(){
           <select id="selectedTable" style={inputTableStyle}>
             {tableOptions}
           </select>
-          <button onClick={() => this.props.getThunkTable()}>Get Data</button>
+          <button id="load" onClick={() => this.props.getThunkTable()}>Get Data</button>
         </span>
         <br/>
             {/* <span><label>Delete a Row (Insert id):</label>

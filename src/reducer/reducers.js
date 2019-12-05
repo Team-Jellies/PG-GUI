@@ -9,7 +9,8 @@ const initialState = {
   uri: '',
   tableNames: [],
   currentTable: '',
-  data: []
+  data: [],
+  bool: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -33,11 +34,13 @@ const reducer = (state = initialState, action) => {
           // const data = { uri };
 
     case type.GET_TABLE:
+      const currentBool = !state.bool
+      // document.getElementById('load').click()
       return ({
         ...state,
         data: action.payload.result,
-        currentTable: action.payload.currentTable
-        
+        currentTable: action.payload.currentTable,
+        bool: currentBool
       })
     default: return state;
   }
