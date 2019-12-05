@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import TableDisplay from '../components/TableDisplay';
 import { connect } from 'react-redux';
 import * as actions from '../constant/actionCreator.js';
+import store from '../store.js';
+import thunks from '../reducer/middleware.js';
+
 
 const mapDispatchToProps = dispatch => ({
   getUri: (string) => dispatch(actions.getUri(string)),
-  getThunkName: () => dispatch(actions.getThunkName()),
-  getThunkTable: (obj) => dispatch(actions.getThunkTable(obj)),
+  getThunkName: (uri) => dispatch(thunks.getThunkName(uri)),
+  getThunkTable: (obj) => dispatch(thunks.getThunkTable(obj)),
 });
 
 const mapStateToProps = (store) => ({
@@ -130,8 +133,11 @@ render(){
             placeholder="progres://"
           ></input>
           <button onClick={() => {
+            // console.log(document.querySelector('#uri').value)
             this.props.getUri(document.querySelector('#uri').value)
-            this.props.getTableNames()
+            // console.log('uri', )
+            this.props.getThunkName(store.getState().data.uri)
+            console.log('after thunkName')
           }}>Get Tables</button>
         </span>
         <br />
@@ -140,7 +146,7 @@ render(){
           <select id="selectedTable" style={inputTableStyle}>
             {tableOptions}
           </select>
-          <button onClick={() => this.props.getTable(this.props.currentTable)}>Get Data</button>
+          <button onClick={() => this.props.getThunkTable()}>Get Data</button>
         </span>
         <br/>
             {/* <span><label>Delete a Row (Insert id):</label>

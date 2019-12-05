@@ -14,10 +14,12 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   if (!action.payload) return state;
+  // console.log(action);
   switch (action.type) {
     case type.GET_URI:
-        // const uri = document.querySelector('#uri').value;
+      // const uri = document.querySelector('#uri').value;
       const uri = action.payload;
+      // console.log('hitting this', uri)
       return ({
           ...state,
           uri

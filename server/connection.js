@@ -8,7 +8,7 @@ connectionPoint.createConnection = (req, res, next) => {
 
 // URI to TEST
 //uri='postgres://gymyqkck:KDN5_PWumJO6UorMKuex8LLGBsTlISs8@salt.db.elephantsql.com:5432/gymyqkck'
-
+//postgres://gymyqkck:KDN5_PWumJO6UorMKuex8LLGBsTlISs8@salt.db.elephantsql.com:5432/gymyqkck
 // Connect to pool with URI from POST request
 const pool = new Pool({
     connectionString: uri

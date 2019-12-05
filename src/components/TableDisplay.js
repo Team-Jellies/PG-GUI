@@ -19,7 +19,6 @@ class TableDisplay extends React.Component {
   // }
 
   render() {
-    debugger;
     const lengthRow = this.props.data.length;
     const rowsArr = [];
     const boxShadow = {
@@ -56,7 +55,7 @@ class TableDisplay extends React.Component {
         <br></br>
         <div style={boxShadow}>
           <TableHeader
-            keys={Object.keys(this.props.data[{}])}
+            keys={Object.keys(this.props.data[0]||{})}
             tableName={this.props.tableName}
             uri={this.props.uri}
           />
