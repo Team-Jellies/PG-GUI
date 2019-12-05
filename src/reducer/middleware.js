@@ -6,7 +6,7 @@ import * as actionCreator from '../constant/actionCreator.js';
 
 const thunk = (action) => {
   switch (action.type) {
-    case 'GET_NAMES':
+    case type.GET_NAMES:
           const data = { uri: action.payload }
           // this.setState({ uri });
           // const data = { uri };
@@ -25,7 +25,7 @@ const thunk = (action) => {
               });
               return titlesArray;
             }).then(arr => {store.dispatch(actionCreator.getTableName(arr))});
-    case 'GET_TABLE':
+    case type.GET_TABLE:
           // Get required data to build queryString to query database
           const uri = this.state.uri;
           const tableName = document.querySelector('#selectedTable').value;
