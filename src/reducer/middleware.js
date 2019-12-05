@@ -1,9 +1,10 @@
 import React from 'react';
 // import ReduxThunk from 'redux-thunk';
-import actions from 'wherever';
+import * as type from '../constant/actionTypes.js';
 import store from '../store';
+import * as actionCreator from '../constant/actionCreator.js';
 
-const thnking = (action) => {
+const thunk = (action) => {
   switch (action.type) {
     case 'GET_NAMES':
           const data = { uri: action.payload }
@@ -23,7 +24,7 @@ const thnking = (action) => {
                 }
               });
               return titlesArray;
-            }).then(arr => {store.dispatch(/*ACTION CREATOR ( ARR )*/)});
+            }).then(arr => {store.dispatch(actionCreator.getTableName(arr))});
     case 'GET_TABLE':
           // Get required data to build queryString to query database
           const uri = this.state.uri;

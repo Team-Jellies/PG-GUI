@@ -1,7 +1,9 @@
-import devToolsEnhancer from 'remote-redux-devtools';
-import {createStore} from 'redux';
+// import devToolsEnhancer from 'remote-redux-devtools';
+import {createStore, applyMiddleware, compose} from 'redux';
 import reducers from './reducer/reducers.js';
-//todo apply middleware
-const store = createStore(reducers, devToolsEnhancer());
+import thunk from 'redux-thunk';
+
+
+const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
 export default store;
