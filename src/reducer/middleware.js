@@ -7,7 +7,7 @@ import * as actionCreator from '../constant/actionCreator.js';
 const thunk = (action) => {
   switch (action.type) {
     case type.GET_NAMES:
-          const data = { uri: action.payload }
+          const data = { uri: store.data.uri }
           // this.setState({ uri });
           // const data = { uri };
           fetch('/server/tablenames', {
@@ -27,9 +27,14 @@ const thunk = (action) => {
             }).then(arr => {store.dispatch(actionCreator.getTableName(arr))});
     case type.GET_TABLE:
           // Get required data to build queryString to query database
-          const uri = this.state.uri;
-          const tableName = document.querySelector('#selectedTable').value;
-          const queryString = 'select * from ' + tableName;
+          const uri = store.data.uri;
+          const currentTable = action.payload.currentTable;
+          let queryString;
+
+          if (!action.payload.queryString) {
+            queryString = 'select * from ' + tableName;
+          } else queryString = action.payload.queryString;
+
           const data = { uri, queryString };
           
           // send URI and queryString in a post request
@@ -40,11 +45,10 @@ const thunk = (action) => {
           })
             .then(res => res.json())
             .then(result => {
-              // this.setState({
-                data: result,
-                isLoading: false,
-                currentTable: tableName
-              // });
+              store.dispatch(actionCreator.GET_TABLE({result, currentTable}))
             });
+  default: return action;
   }
 }
+
+export default thunk;

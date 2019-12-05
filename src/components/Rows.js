@@ -5,15 +5,14 @@ class Row extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
 
     this.onEnter = this.onEnter.bind(this);
   }
 
   onEnter(event) {
     const PK = Object.keys(this.props.data)[0]
-    const reRender = this.props.reRender;
-    const uri = this.props.uri;
+    // const reRender = this.props.reRender;
+    // const uri = this.props.uri;
     const tableName = this.props.tableName
     
     if (event.key === '?') {
@@ -21,7 +20,8 @@ class Row extends Component {
       const query = event.target.placeholder;
       const filterString = `SELECT * FROM ${tableName} WHERE ${columnName} = '${query}'`
 
-      reRender(filterString)
+      // reRender(filterString)
+      this.props.getThunkTable({ currentTable: this.props.currentTable, queryString: filterString});
       
       
     }
@@ -31,8 +31,8 @@ class Row extends Component {
       const query = event.target.placeholder;
       const filterString = `SELECT * FROM ${tableName} WHERE ${columnName} != '${query}'`
 
-      reRender(filterString)
-      
+      // reRender(filterString)
+      this.props.getThunkTable({ currentTable: this.props.currentTable, queryString: filterString});
     }
 
     if (event.key === 'Enter') {
@@ -48,14 +48,15 @@ class Row extends Component {
         queryString = `UPDATE ${tableName} SET ${columnName} = ${Number(newValue)} WHERE ${PK} = ${PKValue}`;
         }
 
+      this.props.getThunkTable({ currentTable: this.props.currentTable, queryString });
 
-      fetch('/server/update', {
-        method: 'POST',
-        body: JSON.stringify({ uri, queryString }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-          }).then(data => reRender())
+      // fetch('/server/update', {
+      //   method: 'POST',
+      //   body: JSON.stringify({ uri, queryString }),
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   }
+      //     }).then(data => reRender())
     }
   }
 

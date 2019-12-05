@@ -6,19 +6,20 @@ import CreatePopup from './createPopup.js';
 class TableDisplay extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showPopup: false
-    };
-    this.togglePopup = this.togglePopup.bind(this);
+    // this.state = {
+    //   showPopup: false
+    // };
+    // this.togglePopup = this.togglePopup.bind(this);
   }
 
-  togglePopup() {
-    this.setState({
-      showPopup: !this.state.showPopup
-    });
-  }
+  // togglePopup() {
+  //   this.setState({
+  //     showPopup: !this.state.showPopup
+  //   });
+  // }
 
   render() {
+    debugger;
     const lengthRow = this.props.data.length;
     const rowsArr = [];
     const boxShadow = {
@@ -30,9 +31,10 @@ class TableDisplay extends React.Component {
     for (let i = 0; i < lengthRow; i += 1) {
       rowsArr.push(
         <Row
+          getThunkTable={this.props.getThunkTable}
           key={i + '_row'}
-          reRender={this.props.reRender}
-          tableName={this.props.tableName}
+          // reRender={this.props.reRender}
+          tableName={this.props.currentTable}
           uri={this.props.uri}
           data={this.props.data[i]}
         />
@@ -41,8 +43,8 @@ class TableDisplay extends React.Component {
 
     return (
       <div class="flex">
-        <button onClick={this.togglePopup}>Create Row</button>
-        {this.state.showPopup ? (
+        {/* <button onClick={this.togglePopup}>Create Row</button> */}
+        {/* {this.state.showPopup ? (
           <CreatePopup
             closePopup={this.togglePopup}
             keys={Object.keys(this.props.data[0])}
@@ -50,12 +52,11 @@ class TableDisplay extends React.Component {
             tableName={this.props.tableName}
             uri={this.props.uri}
           />
-        ) : null}
+        ) : null} */}
         <br></br>
         <div style={boxShadow}>
           <TableHeader
-            keys={Object.keys(this.props.data[0])}
-            reRender={this.props.reRender}
+            keys={Object.keys(this.props.data[{}])}
             tableName={this.props.tableName}
             uri={this.props.uri}
           />
