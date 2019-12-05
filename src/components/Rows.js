@@ -5,15 +5,14 @@ class Row extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
 
     this.onEnter = this.onEnter.bind(this);
   }
 
   onEnter(event) {
     const PK = Object.keys(this.props.data)[0]
-    const reRender = this.props.reRender;
-    const uri = this.props.uri;
+    // const reRender = this.props.reRender;
+    // const uri = this.props.uri;
     const tableName = this.props.tableName
     
     if (event.key === '?') {
@@ -21,7 +20,8 @@ class Row extends Component {
       const query = event.target.placeholder;
       const filterString = `SELECT * FROM ${tableName} WHERE ${columnName} = '${query}'`
 
-      reRender(filterString)
+      // reRender(filterString)
+      this.props.getThunkTable(filterString);
       
       
     }
@@ -31,8 +31,8 @@ class Row extends Component {
       const query = event.target.placeholder;
       const filterString = `SELECT * FROM ${tableName} WHERE ${columnName} != '${query}'`
 
-      reRender(filterString)
-      
+      // reRender(filterString)
+      this.props.getThunkTable(filterString);
     }
 
     if (event.key === 'Enter') {
@@ -48,15 +48,31 @@ class Row extends Component {
         queryString = `UPDATE ${tableName} SET ${columnName} = ${Number(newValue)} WHERE ${PK} = ${PKValue}`;
         }
 
+      // const test = new Promise(() => this.props.getThunkTable(queryString)).then(() => {
+      //   console.log('does this click?')
+      //   document.querySelector('#load').click()})
+      // const test2 = new Promise(() => this.props.getThunkTable());
+      // test
 
-      fetch('/server/update', {
-        method: 'POST',
-        body: JSON.stringify({ uri, queryString }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-          }).then(data => reRender())
+      // async function test() {
+      //   return this.props.getThunkTable(queryString)
+      // }
+
+      // test.then(()=> console.log('g'))
+
+     this.props.getThunkTable(queryString);
+      // }
+      // getData()
+
+      // fetch('/server/update', {
+      //   method: 'POST',
+      //   body: JSON.stringify({ uri, queryString }),
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   }
+      //     }).then(data => reRender())
     }
+  
   }
 
   render() {
