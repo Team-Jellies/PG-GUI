@@ -4,7 +4,7 @@ const PORT = 3000;
 const path = require("path");
 const bodyParser = require("body-parser");
 
-const serverRoutes = require("../routes/server-routes");
+// const serverRoutes = require("../routes/server-routes");
 const authRoutes = require("../routes/auth-routes");
 const passportSetup = require("../config/passport-setup");
 const mongoose = require("mongoose");
@@ -32,12 +32,7 @@ app.use("/dist", express.static(path.join(__dirname, "../dist")));
 //   return next();
 // });
 
-// app.get('/', function (req, res) {
-//     res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
-//   })
-
-
-app.use('/', express.static(path.resolve(__dirname, '../dist')))   
+ 
 
 app.set("view engine", "ejs");
 app.get("/serviceWorker.js", (req, res) => {
@@ -45,7 +40,7 @@ app.get("/serviceWorker.js", (req, res) => {
 });
 app.use("/auth", authRoutes);
 
-// app.use('/server', serverRoutes)
+// app.post('/server', serverRoutes)
 
 app.post(
   "/server/tablenames",

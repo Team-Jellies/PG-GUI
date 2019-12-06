@@ -102,7 +102,7 @@ class MainContainer extends Component {
     // END OF METHODS // 
 
 render(){
-    const inputStyle={margin:'10px', width: "500px",}
+    const inputStyle={margin:'10px', width: '100vh',}
     const inputTableStyle={margin:'10px', width: "100px",}
     const tableOptions =[]
 
@@ -129,7 +129,7 @@ render(){
                 <li><a href="/dashboard">Dashboard</a></li>
                 <li><a href="/stats">Stats</a></li>
                 <li><a href="/auth/logout">Logout</a></li>
-                <li><a href="/settings">Settings</a></li>
+                <li><a href="/auth/settings">Settings</a></li>
             </ul>
         </nav>
   <div class="flex">
