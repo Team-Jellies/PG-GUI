@@ -127,10 +127,9 @@ render(){
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/settings">Settings</a></li>
                 <li><a href="/stats">Stats</a></li>
-                <li><a href="/auth/login">Login</a></li>
                 <li><a href="/auth/logout">Logout</a></li>
+                <li><a href="/settings">Settings</a></li>
             </ul>
         </nav>
   <div class="flex">

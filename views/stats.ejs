@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Exploring Chart.js</title>
+    <title></title>
 </head>
 <style>
     body{
@@ -48,30 +48,25 @@
 <body>
         <nav>
                 <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/settings">Settings</a></li>
+                    <li><a href="/stats">Stats</a></li>
                     <li><a href="/auth/logout">Logout</a></li>
-                    <li><a href="/auth/login">Login</a></li>
-                    <li><a href="/auth/login">Dashboard</a></li>
-                    <li><a href="/auth/login">Settings</a></li>
-                    <li><a href="/auth/login">Stats</a></li>
-                    <li><a href="/">Homepage</a></li>
                 </ul>
             </nav>
             <header>
-                <h1>Dashboard</h1>
+                <h1>Stats</h1>
             </header>
-        <button  style="background-color:#4CAF50;border:none;color:white;padding:15px 32px;display:inline-block;font-size:16px;" a href="index.html">Home</button>
-        <button  style="background-color:blue;border:none;color:white;padding:15px 32px;display:inline-block;font-size:16px;padding-left:40px;margin-left:30px">Stats</button>
         <br>
         <br>
         <br>
         <form method="post" action="/">
             <input type="text" name="query">
             <input type="submit" value="Submit">
+            <button id="renderBtn">Render</button>
         </form>
-        <br>
-        <br>
-        <button id="renderBtn">Render</button>
-    <p> Words Frequency</p>
+    <p></p>
     <div class="container">
             <canvas id="myChart2"></canvas>
         </div>
@@ -89,6 +84,201 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="chart.js"> </script>
+<script>function renderChart(data, labels) { 
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Sentiment Score',
+                    data: data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)',
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)',
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)'
+                    ],
+                }]
+            },
+        });
+    }
+    
+    
+    function renderChart2(data, labels) { 
+        var ctx2 = document.getElementById("myChart2").getContext('2d');
+        var myChart2 = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Words Frequency',
+                    data: data,
+                    backgroundColor: [
+                        // 'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)',
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)',
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)'
+                    ],
+                }]
+            },
+        });
+    }
+    
+    function renderChart3(data, labels) { 
+        var ctx3 = document.getElementById("myChart3").getContext('2d');
+        var myChart3 = new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Words Score',
+                    data: data,
+                    backgroundColor: [
+                        // 'rgba(255, 99, 132, 0.8)',
+                        // 'rgba(54, 162, 235, 0.8)',
+                        // 'rgba(255, 206, 86, 0.8)',
+                        // 'rgba(75, 192, 192, 0.8)',
+                        // 'rgba(153, 102, 255, 0.8)',
+                        // 'rgba(255, 159, 64, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)',
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)',
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)'
+                    ],
+                }]
+            },
+        });
+    }
+    
+    
+    let dataArray = [];
+    
+    const getData = () => {
+        fetch('/sts')
+        .then(res => {
+            return res.json()
+         })
+        .then(stats => {
+            dataArray = []
+            stats.forEach(ele => dataArray.push(Number(ele)))
+    
+        })
+    }
+    
+    
+    let wordsArray = [];
+    
+    const getWords = () => {
+        fetch('/words')
+        .then(res => {
+            return res.json()
+         })
+        .then(stats => {
+            wordsArray = []
+            stats.forEach(e =>wordsArray.push(e[0]))
+        })
+    }
+    
+    
+    $("#renderBtn").click(
+        async function () {
+    
+            await getData()
+            let objCount = {}
+            console.log(dataArray)
+            dataArray.forEach(ele => {
+                if (objCount[ele])
+                objCount[ele] += 1
+                else 
+                objCount[ele] = 1
+            })
+    
+            let data =Object.values(objCount).sort()
+            let labels = Object.keys(objCount).sort((a,b) => a-b)
+    
+            renderChart(data, labels);
+    
+            await getWords()
+            let wordsCount = {}
+            wordsArray.forEach(e => {
+                if(wordsCount[Object.keys(e)[0]])
+                    wordsCount[Object.keys(e)[0]] += 1
+                else
+                wordsCount[Object.keys(e)[0]] = 1
+            })
+    
+            // console.log(wordsCount)
+            let data2 =Object.values(wordsCount)
+            let labels2 = Object.keys(wordsCount)
+            
+            console.log(data2)
+            console.log(labels2)
+    
+            renderChart2(data2, labels2);
+    
+            // let setArray = [... new Set(wordsArray)]
+            // console.log('WORDS ARRAY', wordsArray)
+            let uniqueObj = {}
+            wordsArray.forEach(e => {
+                if (!uniqueObj[Object.keys(e)[0]])
+                    uniqueObj[Object.keys(e)[0]] = Object.values(e)[0]
+            })
+    
+            let data3 = Object.values(uniqueObj)
+            let labels3 = Object.keys(wordsCount)
+    
+            renderChart3(data3, labels3);
+        }
+    ) </script>
 
 </html>

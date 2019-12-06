@@ -36,6 +36,9 @@ app.use("/dist", express.static(path.join(__dirname, "../dist")));
 //     res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 //   })
 
+
+app.use('/', express.static(path.resolve(__dirname, '../dist')))   
+
 app.set("view engine", "ejs");
 app.get("/serviceWorker.js", (req, res) => {
   res.sendFile(__dirname + "/views/serviceWorker.js");

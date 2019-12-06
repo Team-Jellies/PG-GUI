@@ -6,10 +6,15 @@ router.get('/login', (req, res) =>{
     res.render('login')
   });
   //auth logout
-  router.get('/logout', (req,res) => {
+router.get('/logout', (req,res) => {
+//handle with passport
+res.render('logout');
+})
+
+router.get('/settings', (req,res) => {
     //handle with passport
-    res.send('login out');
-  })
+    res.render('settings');
+    })
   //auth with google to go to the consent screen NOTE: first time it runs authenticate
   // specifying the scope
   router.get('/google', passport.authenticate('google', {
