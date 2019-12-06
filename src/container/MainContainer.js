@@ -121,10 +121,22 @@ render(){
           // reRender={this.reRender}
         />
       ];
-   
-
     return (
-      <div class="flex">
+      <div>
+      <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/settings">Settings</a></li>
+                <li><a href="/stats">Stats</a></li>
+                <li><a href="/auth/login">Login</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+            </ul>
+        </nav>
+  <div class="flex">
+    <header>
+        <h1>Dashboard</h1>
+    </header>
         <span>
           <label>Place URI Here:</label>
           <input
@@ -155,6 +167,7 @@ render(){
             {/* </span> */}
         <h2>{this.props.currentTable}</h2>
         <div>{tableArray}</div>
+      </div>
       </div>
     );
   }
