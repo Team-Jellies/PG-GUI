@@ -36,9 +36,11 @@ const getThunkTable = (queryString) =>
     // Get required data to build queryString to query database
     const uri = store.getState().data.uri;
     const currentTable = document.querySelector('#selectedTable').value;
+    let isdefault = false;
     
 
     if (!queryString) {
+      isdefault = true;
       queryString = 'select * from ' + currentTable;
     }
 
@@ -52,6 +54,9 @@ const getThunkTable = (queryString) =>
     })
       .then(res => res.json())
       .then(result => {
+        if (!isdefault) {
+          return store.dispatch(getThunkTable())
+        }
         store.dispatch(actionCreator.getTableData({result, currentTable}))
       });
     }

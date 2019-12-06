@@ -41,7 +41,7 @@ class Row extends Component {
       const PKValue = this.props.data[PK];
       const columnName = event.target.name;
       let queryString;
-      
+      event.target.value = '';
       if (isNaN(newValue)) {
         queryString = `UPDATE ${tableName} SET ${columnName} = '${newValue}' WHERE ${PK} = ${PKValue}`;
       } else {
