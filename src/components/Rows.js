@@ -10,7 +10,7 @@ class Row extends Component {
   }
 
   onEnter(event) {
-    const PK = Object.keys(this.props.data)[0]
+    const PK = Object.keys(this.props.dataObj)
     // const reRender = this.props.reRender;
     // const uri = this.props.uri;
     const tableName = this.props.tableName
@@ -38,7 +38,7 @@ class Row extends Component {
     if (event.key === 'Enter') {
      
       const newValue = event.target.value;
-      const PKValue = this.props.data[PK];
+      const PKValue = this.props.dataObj[PK];
       const columnName = event.target.name;
       let queryString;
       
@@ -76,17 +76,21 @@ class Row extends Component {
   }
 
   render() {
-    const columns = Object.entries(this.props.data);
+    console.log('dataObj ', this.props.dataObj);
+    console.log('dataArr', this.props.dataArr);
+    // const columns = Object.keys(this.props.dataObj);
     const rowsArr = [];
-    columns.forEach((val, index) => {
-      rowsArr.push(
-        <InputCell
-          key={index + '_inputCell'}
-          data={val[1]}
-          column={val[0]}
-          onEnter={this.onEnter}
-        />
-      );
+      Object.keys(this.props.dataObj).forEach((key, i) => {
+        rowsArr.push(
+          <InputCell
+            key={i + '_inputCell'}
+            data={this.props.dataObj[key]}
+            column={key}
+            onEnter={this.onEnter}
+          />
+        );
+
+      
     });
 
     return <div>{rowsArr}</div>;

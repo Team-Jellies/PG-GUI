@@ -102,6 +102,7 @@ class MainContainer extends Component {
     // END OF METHODS // 
 
 render(){
+  console.log(store.getState())
     const inputStyle={margin:'10px', width: "500px",}
     const inputTableStyle={margin:'10px', width: "100px",}
     const tableOptions =[]

@@ -35,7 +35,8 @@ class TableDisplay extends React.Component {
           // reRender={this.props.reRender}
           tableName={this.props.currentTable}
           uri={this.props.uri}
-          data={this.props.data[i]}
+          dataObj={this.props.data[i]}
+          dataArr={this.props.data}
         />
       );
     }
