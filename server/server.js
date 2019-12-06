@@ -5,6 +5,14 @@ const path = require('path');
 const file = require('./controller')
 const connectionPoint = require('./connection.js').connectionPoint
 const bodyParser = require('body-parser');
+const fs = require("fs")
+
+
+// const certOptions = {
+//   key: fs.readFileSync(path.resolve(__dirname, "../certs/server.key")),
+//   cert: fs.readFileSync(path.resolve(__dirname, "../certs/server.crt"))
+// }
+// const https = require('https').createServer(certOptions, app);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -48,7 +56,8 @@ app.post('/server/create', connectionPoint.createConnection, file.create, (req, 
 app.delete('/server/delete', connectionPoint.createConnection, file.delete, (req, res) => {
   return res.status(200).json(res.locals.delete)
 })
-  
+
+
 app.listen(PORT, ()=> {console.log(`Listening on Port ${PORT}`)})
 
 module.exports = app;
