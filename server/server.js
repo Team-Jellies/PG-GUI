@@ -1,3 +1,5 @@
+require("dotenv").config();
+const cors = require("cors");
 const express = require("express");
 const app = express();
 const PORT = 3000;
@@ -9,6 +11,7 @@ const authRoutes = require("../routes/auth-routes");
 const connectionPoint = require("./connection.js").connectionPoint;
 const file = require("./controller");
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/dist", express.static(path.join(__dirname, "../dist")));
@@ -87,7 +90,6 @@ app.get("/dashboard", (req, res) => {
 app.get("/stats", (req, res) => {
   res.render("stats");
 });
-
 
 app.get("/", (req, res) => {
   res.render("home");
